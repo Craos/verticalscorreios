@@ -97,11 +97,15 @@ class Envio extends PHPMailer
                 return true;
             }
 
-            $this->Observacoes = 'Mailer:'.$this->ErrorInfo;
+            $this->Observacoes = $this->ErrorInfo;
             return false;
 
         } catch (Exception $e) {
-            $this->Observacoes = 'Exception:'.$e->getMessage();
+            $this->Observacoes = $e->getMessage();
+
+            if ($e->getCode() === 2) {
+                return false;
+            }
             return null;
         }
 

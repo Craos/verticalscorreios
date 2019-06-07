@@ -39,7 +39,11 @@
         }
 
         .endereco {
-            color: #ff1db0;
+            color: #9d116e;
+        }
+
+        .obs {
+            color: rgba(226, 174, 71, 0.88);
         }
 
         .font11 {
@@ -56,10 +60,10 @@
 <table>
     <thead>
         <tr>
-            <td class='c'>Bloco:</td>
-            <td class='v'>#bloco#</td>
             <td class='c'>Unidade:</td>
-            <td class='v'>#unidade#</td>
+            <td class='v'>#bloco# - #unidade#</td>
+            <td class='c'>&nbsp;</td>
+            <td class='v'>&nbsp;</td>
             <td class='c'>ID da notificação:</td>
             <td class='v'>#id#</td>
             <td class='c'>Data:</td>
@@ -72,9 +76,10 @@
             <td class='v' colspan='7'>#rastreio#</td>
         </tr>
         <tr>
-            <td class='c'>Remetente:</td>
-            <td class='v font11' colspan='7'>#remetentesutilizados#</td>
+            <td class='c'>Log de tentativas:</td>
+            <td class='v font11' colspan='7'>&nbsp;</td>
         </tr>
+        #log#
         <tr>
             <td class='c'>Destinatários:</td>
             <td class='v' colspan='7'>#destinatarios#</td>

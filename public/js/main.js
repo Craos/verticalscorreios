@@ -63,7 +63,7 @@ dhtmlxEvent(window, 'load', function () {
                 new Operacoes(siderbar.cells('controle'));
                 break;
             case 'historico':
-                new HistoricoEnvio();
+                new HistoricoEnvio(siderbar.cells('historico'));
                 break;
         }
     };

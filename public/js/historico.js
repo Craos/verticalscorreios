@@ -1,6 +1,25 @@
-var Historico = function () {
+var Historico = function (container) {
 
     var that = this;
+
+    let layout = container.attachLayout({
+        pattern: '1C',
+        offsets: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0
+        },
+        cells: [
+            {
+                id: 'a',
+                header: false,
+            }
+        ]
+    });
+
+    let cell = layout.cells('a');
+
 
     /**
      *

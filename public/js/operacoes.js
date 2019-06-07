@@ -86,7 +86,7 @@ let Operacoes = function (container) {
                 that.AtualizaGrid();
                 break;
             case 'historico':
-                new Historico().Exibir(toolbarinputs);
+                new Historico(container).Exibir(toolbarinputs);
                 break;
             case 'pesquisar':
                 that.Pesquisar(toolbarinputs);
@@ -121,7 +121,7 @@ let Operacoes = function (container) {
             type: 'alert',
             text: 'Autorização efetuada com sucesso'
         });
-        new Historico().BuscarItens(info.detail.registros);
+        new Historico(container).BuscarItens(info.detail.registros);
     });
 
     /**
@@ -171,7 +171,7 @@ let Operacoes = function (container) {
             return;
         }
 
-        new Notificacao(grid.getSelectedRowId()).Iniciar(function () {
+        new Processanotificacao(grid.getSelectedRowId()).Iniciar(function () {
            that.AtualizaGrid();
         });
 

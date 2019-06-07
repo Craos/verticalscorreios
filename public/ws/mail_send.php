@@ -112,7 +112,7 @@ function ProcessaInformacoes(Registros $registros, Array $remetentes, $modelo)
         $destinatarios = new Destinatarios($paraenviar->bloco, $paraenviar->unidade);
 
         $situacao = null;
-        $remetentesutilizados = [];
+        $logtentativas = [];
 
         foreach ($remetentes as $remetente) {
 
@@ -127,7 +127,8 @@ function ProcessaInformacoes(Registros $registros, Array $remetentes, $modelo)
             $envio->PreparaConteudo();
             $resultado = $envio->Iniciar();
 
-            $remetentesutilizados[] = "<span class='endereco'>".$remetente['endereco']."</span> $envio->Observacoes<br/><hr>";
+            $tentativas = ((int)count($logtentativas))+1;
+            $logtentativas[] = "<tr><td class='c'>Tentativa Nº:" . $tentativas . "</td><td class='v endereco'>".$remetente['endereco']."<br><span class='obs'>".$envio->Observacoes."</span></td></tr>";
 
             if ($resultado === true) {
 
@@ -155,15 +156,15 @@ function ProcessaInformacoes(Registros $registros, Array $remetentes, $modelo)
         Response(array(
             'status' => 'processando',
             'processoid' =>$identificacao,
-            'processamento' => $processamento = Array(
+            'processamento' => Array(
                 'bloco' => $paraenviar->bloco,
                 'unidade' => $paraenviar->unidade,
                 'data' => $paraenviar->data,
                 'rastreio' => $paraenviar->rastreio,
                 'id' => $paraenviar->id,
                 'codigo' => $paraenviar->codigo,
-                'remetentesutilizados'=>implode(' ', $remetentesutilizados),
-                'destinatarios' => implode(', ', $destinatarios->lista),
+                'logtentativas'=>$logtentativas,
+                'destinatarios' => (count($destinatarios->lista) === 0) ? 'Nenhum destinatário encontrado' : implode(', ', $destinatarios->lista),
                 'situacao' => $dscsituacao,
                 'valorsituacao'=>$valorsituacao,
                 'classsituacao'=>$classsituacao
@@ -177,11 +178,7 @@ function ProcessaInformacoes(Registros $registros, Array $remetentes, $modelo)
 
     }
 
-
-    ob_end_flush();
-    http_response_code(200);
     exit(0);
-
 
 }
 
