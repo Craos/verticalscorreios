@@ -1,0 +1,33 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dhxlayout_base_material div.dhx_cell_layout div.dhx_cell_hdr {
+    background-color: rgba(240, 240, 240, 0.38);
+}
+
+.mdcr, .mdmd {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.mdcr {
+    color: #404040;
+}
+
+.mdmd {
+    color: #ff0000;
+}
+
+.env {
+    font-size: 20px;
+    color: #626262;
+}
+
+.md {
+    font-size: 20px;
+    color: red
+}

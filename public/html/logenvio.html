@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Log de processamento</title>
+    <style>
+        table {
+            border: 0;
+            width: 100%;
+        }
+
+        .c {
+            font-weight: 300;
+            text-align: end;
+            color: #a3abb5;
+        }
+
+        .v {
+            color: #1699db;
+            font-weight: 100;
+            font-size: 85%;
+        }
+
+        .falha, .sucesso {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            float: left;
+            margin-top: 3px;
+            margin-right: 10px;
+        }
+
+        .falha {
+            background-color: red;
+        }
+        
+        .sucesso {
+            background-color: springgreen;
+        }
+
+        .endereco {
+            color: #ff1db0;
+        }
+
+        .font11 {
+
+        }
+
+        hr {
+            border: 0;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <td class='c'>Bloco:</td>
+            <td class='v'>#bloco#</td>
+            <td class='c'>Unidade:</td>
+            <td class='v'>#unidade#</td>
+            <td class='c'>ID da notificação:</td>
+            <td class='v'>#id#</td>
+            <td class='c'>Data:</td>
+            <td class='v'>#data#</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class='c'>Código de rastreio:</td>
+            <td class='v' colspan='7'>#rastreio#</td>
+        </tr>
+        <tr>
+            <td class='c'>Remetente:</td>
+            <td class='v font11' colspan='7'>#remetentesutilizados#</td>
+        </tr>
+        <tr>
+            <td class='c'>Destinatários:</td>
+            <td class='v' colspan='7'>#destinatarios#</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class='c'>Situação:</td>
+            <td class='v' colspan='7'><div class='#classsituacao#'></div>#situacao#</td>
+        </tr>
+    </tfoot>
+</table>
+</body>
+</html>
