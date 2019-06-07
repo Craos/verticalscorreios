@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Custom js scroll</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <script type="text/javascript" src="../../codebase/vault.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../../codebase/vault.css?v=3.0.0">
+
+        <script type="text/javascript" src="../common/js/index.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../common/dhx_samples.css?v=3.0.0">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.6.95/css/materialdesignicons.css?v=3.0.0">
+   </head>
+    <body>
+        <div class="top-rect-block">
+            <div class="radio-group-block">
+                <div class="text-value">Custom js scroll: </div>
+                <div class="radio-block checked" id="turn-on">
+                    <div class="radio mdi mdi-radiobox-marked"></div>
+                    <div class="radio-label">On</div>
+                </div>
+                <div class="radio-block" id="turn-off">
+                    <div class="radio mdi mdi-radiobox-blank"></div>
+                    <div class="radio-label">Off</div>
+                </div>
+            </div>
+        </div>
+        <div id="vault" class="container with-header" style='height:200px'></div>
+        <script>
+            var vault = new dhx.Vault("vault", {
+                uploader: {
+                    target: "/backend/upload"
+                },
+                customScroll: true
+            });
+            vault.data.parse(filesData);
+
+            var radioGroup = document.getElementsByClassName("radio-group-block")[0];
+            addListenersForRadioGroup(radioGroup, function(id) {
+                if (id === "turn-on") {
+                    vault.config.customScroll = true;
+                } else {
+                    vault.config.customScroll = false;
+                }
+
+                vault.paint();
+            });
+
+        </script>
+    </body>
+</html>

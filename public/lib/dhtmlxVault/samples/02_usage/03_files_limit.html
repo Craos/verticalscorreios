@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Files limit</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <script type="text/javascript" src="../../codebase/vault.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../../codebase/vault.css?v=3.0.0">
+
+        <script type="text/javascript" src="../common/js/index.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../common/dhx_samples.css?v=3.0.0">
+   </head>
+    <body>
+        <div class="top-rect-block">
+            <div class="text-value">limit</div>
+            <input type="text" class="filter-input small-filter-input" id="limit" value="1">
+        </div>
+    
+        <div id="vault" class="container with-header"></div>
+        <script>
+            var vault = new dhx.Vault("vault", {
+                uploader: {
+                    target: "/backend/upload"
+                }
+            });
+
+            var limit = 1;
+            document.querySelector("#limit").addEventListener("change", function(e) {
+                var value = parseInt(e.target.value) || 1;
+                if (e.target.value !== value) {
+                    e.target.value = value;
+                }
+                limit = +e.target.value;
+            });
+
+            vault.events.on("beforeAdd", function(fileItem) {
+                if (vault.data.getLength() >= limit) {
+                    dhx.message({
+                        text: "current limit - " + limit + ", file " + fileItem.name + " canceled",
+                        css: "dhx-error",
+                        expire: 4000
+                    });
+                    return false;
+                }
+            });
+        </script>
+    </body>
+</html>

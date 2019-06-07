@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Custom icons</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <script type="text/javascript" src="../../codebase/vault.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../../codebase/vault.css?v=3.0.0">
+
+        <script type="text/javascript" src="../common/js/index.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../common/dhx_samples.css?v=3.0.0">
+        <style type="text/css">
+            .extension-js {
+                background: url(../common/custom-icons/JS-custom.svg) no-repeat center center!important;
+            }
+            .extension-doc {
+                background: url(../common/custom-icons/DOC-custom.svg) no-repeat center center!important;
+            }
+            .extension-pdf {
+                background: url(../common/custom-icons/PDF-custom.svg) no-repeat center center!important;
+            }
+            .extension-php {
+                background: url(../common/custom-icons/PHP-custom.svg) no-repeat center center!important;
+            }
+            .extension-psd {
+                background: url(../common/custom-icons/PSD-custom.svg) no-repeat center center!important;
+            }
+            .extension-zip {
+                background: url(../common/custom-icons/ZIP-custom.svg) no-repeat center center!important;
+            }
+        </style>
+   </head>
+    <body>
+        <div class="top-rect-block">
+            <div class="text-value">Custom icons for js, doc, pdf, php, psd, svg</div>
+        </div>
+        <div id="vault" class="container with-header"></div>
+        <script>
+            var vault = new dhx.Vault("vault", {
+                uploader: {
+                    target: "/backend/upload"
+                }
+            });
+            vault.data.parse(filesData);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Info line</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <script type="text/javascript" src="../../codebase/vault.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../../codebase/vault.css?v=3.0.0">
+
+        <script type="text/javascript" src="../common/js/index.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../common/dhx_samples.css?v=3.0.0">
+   </head>
+    <body>        
+        <div class="top-rect-block">
+            <div class="info-line">
+                <div class="files-count">
+                    <div id="files-count-value" class="number-value">0</div>
+                    <div class="text-value">Files /&nbsp</div>
+                </div>
+                <div class="files-size">
+                    <div id="files-size-value" class="number-value">0</div>
+                    <div id="files-size-text" class="text-value">b</div>
+                </div>
+            </div>
+        </div>
+        <div id="vault" class="container with-header"></div>
+
+        <script>
+            var vault = new dhx.Vault("vault", {
+                uploader: {
+                    target: "/backend/upload"
+                }
+            });
+
+            var filesCountValue = document.getElementById("files-count-value");
+            var filesSizeValue = document.getElementById("files-size-value");
+            var filesSizeText = document.getElementById("files-size-text");
+
+            vault.events.on("change", function() {
+                var count = vault.data.getLength();
+                
+                var size = vault.data.reduce(function(sum, item) {
+                    return sum + item.size;
+                }, 0);
+                filesCountValue.textContent = count;
+
+                var basis = getBasis(size, 0, true);
+
+                filesSizeValue.textContent = basis.size;
+                filesSizeText.textContent = basis.metric;
+            });
+
+            vault.data.parse(filesData);
+
+        </script>
+    </body>
+</html>

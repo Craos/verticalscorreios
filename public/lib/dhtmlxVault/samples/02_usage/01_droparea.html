@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Drop area</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <script type="text/javascript" src="../../codebase/vault.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../../codebase/vault.css?v=3.0.0">
+
+        <script type="text/javascript" src="../common/js/index.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../common/dhx_samples.css?v=3.0.0">
+   </head>
+    <body>
+        <div class="top-rect-block">
+            <div class="text-value">You can drop files both to Vault and to another drop area</div>
+        </div>
+        <div class="wrapper with-header">
+            <div id="vault" class="vault-block"></div>
+            <div id="drophere" class="droparea">
+                <div class="droparea-text">Drop here</div>
+            </div>
+        </div>
+        <script>
+            var vault = new dhx.Vault("vault", {
+                uploader: {
+                    target: "/backend/upload"
+                }
+            });
+            vault.uploader.linkDropArea("drophere");
+
+        </script>
+    </body>
+</html>

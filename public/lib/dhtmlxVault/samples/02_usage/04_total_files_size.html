@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Total files size</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <script type="text/javascript" src="../../codebase/vault.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../../codebase/vault.css?v=3.0.0">
+
+        <script type="text/javascript" src="../common/js/index.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../common/dhx_samples.css?v=3.0.0">
+   </head>
+    <body>
+        <div class="top-rect-block">
+                <div class="text-value">Size</div>
+                <select id="size" class="select-list">
+                    <option value="1048576">1mb</option>
+                    <option value="10485760">10mb</option>
+                    <option value="104857600">100mb</option>
+                    <option value="Infinity">unlim</option>
+                </select>
+                <span id='info'></span>
+            </div>
+        <div id="vault" class="container with-header"></div>
+        <script>
+            var vault = new dhx.Vault("vault", {
+                uploader: {
+                    autosend:false,
+                    target: "/backend/upload"
+                }
+            });
+
+            var sizeLimit = 1048576;
+            document.querySelector("#size").addEventListener("change", function(e) {
+                sizeLimit = +e.target.value;
+            });
+
+            function getTotalSize(){
+                return vault.data.reduce(function(total, f) {
+                    return total + f.size;
+                }, 0);
+            }
+
+            function fileName(f) {return f.name || f.file.name}
+            function fileSize(f) {return f.size || f.file.size}
+
+            vault.events.on("beforeAdd", function(fileItem) {
+                if (sizeLimit < fileSize(fileItem) + getTotalSize()) {
+                    dhx.message({
+                        text: fileName(fileItem) + " too large",
+                        css: "dhx-error",
+                        expire: 4000
+                    });
+                    return false;   
+                }
+            });
+
+            vault.events.on("change", function(fileItem){
+                document.getElementById("info").innerHTML = getBasis(getTotalSize()) + " selected"
+            });
+            
+
+        </script>
+    </body>
+</html>

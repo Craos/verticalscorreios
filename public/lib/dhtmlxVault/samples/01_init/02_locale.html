@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Localization</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+	<script type="text/javascript" src="../../codebase/vault.js?v=3.0.0"></script>
+	<link rel="stylesheet" type="text/css" href="../../codebase/vault.css?v=3.0.0">
+
+	<script type="text/javascript" src="../common/js/index.js?v=3.0.0"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.6.95/css/materialdesignicons.css?v=3.0.0">
+	<link rel="stylesheet" type="text/css" href="../common/dhx_samples.css?v=3.0.0">
+</head>
+
+<body>
+	<div class="top-rect-block">
+		<div class="radio-group-block">
+			<div class="text-value">Locale: </div>
+			<div class="radio-block checked" id="use-english">
+				<div class="radio mdi mdi-radiobox-marked"></div>
+				<div class="radio-label">English</div>
+			</div>
+			<div class="radio-block" id="use-deutsch">
+				<div class="radio mdi mdi-radiobox-blank"></div>
+				<div class="radio-label">Deutsch</div>
+			</div>
+		</div>
+	</div>
+	<div id="vault" class="container with-header"></div>
+
+	<script>
+		var english = {
+			add: "Add",
+			browse: "Browse files",
+			cancel: "Cancel",
+			clear: "Clear",
+			clearAll: "Clear all",
+			download: "Download",
+			dragAndDrop: "Drag & drop",
+			filesOrFoldersHere: "files or folders here",
+			or: "or",
+			upload: "Upload"
+		};
+
+		var deutsch = {
+			dragAndDrop: "Drag & Drop",
+			or: "oder",
+			browse: "Suchen Sie Dateien durch",
+			filesOrFoldersHere: "Dateien oder Ordner hier",
+			cancel: "Stornieren",
+			clearAll: "Alles löschen",
+			clear: "Löschen",
+			add: "Hinzufügen",
+			upload: "Hochladen",
+			download: "Herunterladen"
+		};
+
+        var vault = new dhx.Vault("vault", {
+			uploader: {
+                target: "/backend/upload"
+            }
+		});
+
+		var radioGroup = document.getElementsByClassName("radio-group-block")[0];
+		addListenersForRadioGroup(radioGroup, function(id) {
+			if (id === "use-english") {
+				dhx.i18n.setLocale("vault", english);
+			} else {
+				dhx.i18n.setLocale("vault", deutsch);
+			}
+			vault.paint();
+		});
+
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Events</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <script type="text/javascript" src="../../codebase/vault.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../../codebase/vault.css?v=3.0.0">
+
+        <script type="text/javascript" src="../common/js/index.js?v=3.0.0"></script>
+        <link rel="stylesheet" type="text/css" href="../common/dhx_samples.css?v=3.0.0">
+   </head>
+    <body>
+        <div class="top-rect-block">
+            <div class="text-value">Use Vault to see list of events in the right area</div>
+        </div>
+        <div class="wrapper with-header">
+            <div id="vault" class="vault-block"></div>
+            <div id="events-info" class="events-info"></div>
+        </div>
+        <script>
+            var vault = new dhx.Vault("vault", {
+                uploader: {
+                    target: "/backend/upload"
+                }
+            });
+            var info = document.getElementById("events-info");
+            
+            var allEvents = [
+                "beforeAdd",
+                "beforeRemove",
+                "uploadBegin",
+                "beforeUploadFile",
+                "cancel",
+                "uploadFail",
+                "uploadFile",
+                "uploadComplete",
+                "uploadProgress",
+                "afterAdd",
+                "removeAll"
+            ];
+            var counter = 1;
+            allEvents.forEach(event => {
+                vault.events.on(event, function(obj) {
+                    switch(event) {
+                        case "uploadBegin":
+                            var details = "";
+                            obj.forEach(function(fileObj) {
+                                details += getDetails(fileObj);
+                            });
+                            info.insertAdjacentHTML('afterbegin', getEvent(event) + details);
+                            break;
+                        case "uploadProgress":
+                            var progress =  "<div class=\"info\">progress: " + Math.round(obj) + "</div>";
+                            info.insertAdjacentHTML('afterbegin', getEvent(event) + progress);
+                            break;
+                        default:
+                            info.insertAdjacentHTML('afterbegin', getEvent(event) + getDetails(obj));
+                    }
+
+                });
+            });
+            function getEvent(event) {
+                return "<div class=\"event\">#" + counter++ + ": " + event + "</div>";
+            }
+            function getDetails(obj) {
+                if (!obj || !obj.file) {
+                    return "<div class=\"info\"></div>";
+                }
+                return "<div class=\"info\">name: " + obj.file.name + ", <br/> size: " + obj.file.size + "</div>";
+            }
+
+        </script>
+    </body>
+</html>
